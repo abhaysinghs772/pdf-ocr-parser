@@ -3,7 +3,7 @@ import fs from "fs";
 // import pdfjsLib from "pdfjs-dist/legacy/build/pdf.js";
 
 const pdfPath = "./sample.pdf";
-const outputDir = "./images";
+const outputDir = "./v1/images";
 fs.mkdirSync(outputDir, { recursive: true });
 
 // Count total pages dynamically
@@ -14,7 +14,7 @@ const converter = fromPath(pdfPath, {
   density: 300,           // DPI
   saveFilename: "page",
   savePath: outputDir,
-  format: "png",
+  format: "tif",
   width: 2000,
   height: 2000
 });

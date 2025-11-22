@@ -3,8 +3,8 @@ import sharp from 'sharp';
 import fs from 'fs';
 import path from 'path';
 
-const dir = './images';
-const outputDir = './output';
+const dir = './v1/images';
+const outputDir = './v1/output';
 fs.mkdirSync(outputDir, { recursive: true });
 
 const files = fs.readdirSync(dir).filter(f => f.endsWith('.png'));
