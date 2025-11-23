@@ -2,5 +2,7 @@ node_modules/
 sample.pdf
 images/
 output/
+qwen_output/
 package-lock.json
 /*.png
+.venv
