@@ -1,5 +1,15 @@
+/**
+ * using tesseract.js to interact to interact with Tesseract ( c++ package ) which must be installed in the system
+ * see the README.md for installation of the Tesseract ( c++ package ). 
+ * 
+ * WORKING OF THIS SCRIPT
+ * this is a fairly simple script its job is to read the .png or .tif image files
+ * and to convert them to raw kannada text ( box like strings )
+ * 
+ */
+
 import Tesseract from 'tesseract.js';
-import sharp from 'sharp';
+import sharp from 'sharp'; // use this lib to increase the resolution of the image
 import fs from 'fs';
 import path from 'path';
 

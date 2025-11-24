@@ -1,3 +1,10 @@
+/**
+ * 
+ * this script is optional but one can utilize it if they want to,
+ * in order to debug any issue or something like that
+ * 
+ */
+
 import fs from 'fs';
 import fetch from 'node-fetch';
 

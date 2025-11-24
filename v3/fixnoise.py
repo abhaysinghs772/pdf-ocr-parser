@@ -1,3 +1,5 @@
+# this script is optional 
+
 import unicodedata
 import re
 

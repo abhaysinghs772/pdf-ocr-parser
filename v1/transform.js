@@ -1,13 +1,23 @@
-// import { execSync } from "child_process";
+/**
+ * WORKING OF THIS SCRIPT
+ * 
+ * Once the raw Kannada text is extracted then run this script to transform 
+ * the box like non-readable strings to english readable string
+ * 
+ */
+
 import fs from "fs";
 import fetch from 'node-fetch';
 
 const pages = fs.readdirSync("./v1/images").filter(f => f.endsWith(".tif"));
 
 for (const page of pages) {
-  console.log(`processing ${page} with Qwen2.5-VL 🟢`);
+  // I am using Qwen2.5 which gives me 100 % cpu utilization and 33% accuracy ( speed of this model is satisfactory )
+  // but one can also use Qwen2.5-vl for more accuracy
+  // 
+  console.log(`processing ${page} with Qwen2.5 🟢`);
 
-  // Read image as base64 (safe)
+  // Read extracted texts ( box like texts )
   const parsedText = fs.readFileSync(`./v1/output/${page.split('.tif').join('.png.txt')}`, {
     encoding: "utf8"
   });
@@ -15,11 +25,11 @@ for (const page of pages) {
   const payload = {
     model: "qwen2.5:3b",
     prompt: `
-Extract all readable Kannada text from the text provide at the end of this prompt.
-Fix OCR errors.
-Output clean, plain text only.
-${parsedText}
-`.trim(), 
+      Extract all readable Kannada text from the text provide at the end of this prompt.
+      Fix OCR errors.
+      Output clean, plain text only.
+      ${parsedText}
+    `.trim(), 
   };
 
   const res = await fetch('http://localhost:11434/api/generate', {
@@ -31,9 +41,6 @@ ${parsedText}
   if (!res.ok) {
     throw new Error(`HTTP error! status: ${res.status}`);
   }
-
-  // const data = await res.json()
-  // console.log(res.data);
 
   let fullResponse = '';
 
@@ -57,21 +64,10 @@ ${parsedText}
         }
       } catch (e) {
         // This handles lines that might not be clean JSON (rare, but good practice)
-        console.error("Error parsing JSON line:", e.message, "Line:", line);
+        throw new Error("Error parsing JSON line:", e.message, "Line:", line);
       }
     }
   }
-  console.log(fullResponse);
-
-  // 🚀 Use Qwen vision model + input image flag
-  // const requestJson = JSON.stringify({
-  //   model: "qwen2.5:3b",
-  //   prompt,
-  //   images: [imgBase64]
-  // });
-
-  // const cmd = `printf '${requestJson.replace(/'/g, "'\\''")}' | ollama run`;
-  // const result = execSync(cmd).toString();
 
   fs.writeFileSync(
     `./v1/qwen_output/${page}.qwen_${Date.now()}.txt`,

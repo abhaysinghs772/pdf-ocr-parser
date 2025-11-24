@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "Abhay <abhaysinghs772@gmail.com>",
   "license": "ISC",
   "dependencies": {
     "pdf-poppler": "^0.2.3",

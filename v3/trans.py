@@ -1,3 +1,8 @@
+# this script utilizes the reverse-engineered api of google-trans in order to by-pass the token limits kind of thing 
+# and this script is dependent upon google-trans python lib which is not authorized by google and can be banned very soon :-(
+# please use this script at your own risc
+# I will modify this script in future to utilize the authorized google-trans lib using api-key and auth token. 
+
 import asyncio
 from googletrans import Translator
 
